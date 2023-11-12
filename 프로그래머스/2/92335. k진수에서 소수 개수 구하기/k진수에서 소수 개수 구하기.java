@@ -27,6 +27,11 @@ class Solution {
     
     public int isPrime(Long n) {
         if (n > 1) {
+            // for (Long i = 2L; i <= n / 2; i++) { // 테스트 케이스 1번 시간초과
+            //   if (n % i == 0) {
+            //       return 0;
+            //   }
+            // }
             for (Long i = 2L; i <= (int)Math.sqrt(n); i++) {
               if (n % i == 0) {
                   return 0;
