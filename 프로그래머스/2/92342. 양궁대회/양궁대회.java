@@ -1,6 +1,7 @@
 /*
     dfs로 풀이
     스코어 계산
+    https://record-developer.tistory.com/124
 */
 
 class Solution {
