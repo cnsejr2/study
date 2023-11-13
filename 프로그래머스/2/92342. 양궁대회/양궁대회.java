@@ -1,72 +1,54 @@
 /*
-    dfs
-    답안 : https://sennieworld.tistory.com/98
+    dfs로 풀이
+    스코어 계산
 */
 
 class Solution {
     
-    static int[] r, a, ans;
-    static boolean isFind;
-    static int max;
-   
+    static private int[] res = new int[11];
+    static private int[] lion = { -1};
+    static private int max = Integer.MIN_VALUE;
+    
     public int[] solution(int n, int[] info) {
-        a = info.clone();
-        r = new int[11];
-        
-        max = Integer.MIN_VALUE;
-        ans = new int[11];
-        isFind = false;
-        shoot(0, n, 0, 0);
-        
-        return isFind == true ? ans : new int[] { - 1};
+        back(0, n, info);
+        if (max == -1) {
+            lion = new int[1];
+            lion[0] = -1;
+        }
+        return lion;
     }
     
-    private static void shoot(int depth, int rest, int apeach, int ryan) {
-        if (depth == 11) {
-            if (rest == 0 && ryan > apeach) {
-                isFind = true;
-                if (max < (ryan - apeach)) {
-                    max = ryan - apeach;
-                    ans = r.clone();
-                } else if (max == (ryan - apeach)) {
-                    // 가장 낮은 점수를 더 많이 맞힌 경우를 return
-                    for (int i = 10; i >= 0; i--) {
-                        if (r[i] > ans[i]) {
-                            ans = r.clone();
-                            return;
-                        } else if (r[i] < ans[i]) return;
-                    }
-                    
-                }
+    public static void back(int depth, int n, int[] info) {
+        // 화살을 다 꽂았을 때(종료조건)
+        if (depth == n) {
+            int diff = score(info);
+            if (max <= diff) {
+                max = diff;
+                lion = res.clone();
             }
             return;
         }
         
-        // 점수를 안 낼경우 : 둘 다 0일 경우 : 일단 어피치가 0점이어야 가능성이라도 있음
-        if (a[depth] == 0) {
-            shoot(depth + 1, rest, apeach, ryan);
+        for (int i = 0; i < info.length && res[i] <= info[i]; i++) {
+            res[i] += 1;
+            back(depth + 1, n, info);
+            res[i] -= 1;
         }
-        
-        // 점수를 낼 경우 : 어피치보다 무조건 많이 쏴야함, 근데 점수 차이가 많이 날려면 1개만 차이나야 화살을 아낄 수 있음
-        if (rest > a[depth]) {
-            r[depth] = a[depth] + 1;
-            shoot(depth + 1, rest - a[depth] - 1, apeach, ryan + (10 - depth));
-            r[depth] = 0;
-        }
-        
-        
-        // 점수를 줄 경우 : 어피치와 똑같은 수의 화살을 쏘거나 어피치보다 적게 쏘거나의 경우의 수
-        if (a[depth] != 0) {
-            for (int i = 0; i < a[depth]; i++) {
-                if (rest >= i) {
-                    r[depth] = i;
-                    shoot(depth + 1, rest - i, apeach + (10 - depth), ryan);
-                    r[depth] = 0;
-                }
-            }
-        }
-        
-        
     }
     
+    public static int score(int[] info) {
+        int apeach = 0;
+        int lion = 0;
+        for (int i = 0; i < res.length; i++) {
+            if (info[i] == 0 && res[i] == 0) { continue; }
+            if (info[i] >= res[i]) {
+                apeach += (10 - i);
+            } else {
+                lion += (10 - i);
+            }
+        }
+        int diff = lion - apeach;
+        if (diff <= 0) return -1;
+        return diff;
+    }
 }
