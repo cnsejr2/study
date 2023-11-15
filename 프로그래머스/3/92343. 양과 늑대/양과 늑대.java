@@ -2,10 +2,13 @@
     풀이 : https://jangcenter.tistory.com/120
     접근과정 : 
         모든 자식 노드를 탐색 -> dfs
-        노드 형식이기에 ArrayList로 접근할 수 있게 설정
+        자식노드에 접근할 수 있게 ArrayList로 설정
         
         다음 탐색 위치 찾기
-            방문한 노드는 방문할 리스트에서 제거
+            현재 노드의 자식 노드들을 visit(앞으로 방문할 노드)에 추가
+            노드는 wolfCnt < sheepCnt일 때 방문 가능하고
+            방문한 노드는 visit에서 삭제한다. 
+            다시 현재 노드의 자식 노드들을 visit에 추가
         
 */
 
