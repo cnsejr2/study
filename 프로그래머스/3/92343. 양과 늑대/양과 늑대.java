@@ -1,3 +1,14 @@
+/*
+    풀이 : https://jangcenter.tistory.com/120
+    접근과정 : 
+        모든 자식 노드를 탐색 -> dfs
+        노드 형식이기에 ArrayList로 접근할 수 있게 설정
+        
+        다음 탐색 위치 찾기
+            방문한 노드는 방문할 리스트에서 제거
+        
+*/
+
 import java.util.*;
 
 class Solution {
@@ -6,6 +17,8 @@ class Solution {
     static int maxSheepCnt = 0;
     
     public int solution(int[] info, int[][] edges) {
+        
+        // 자식 노드 확인
         Info = info;
         childs = new ArrayList[info.length];
         
@@ -28,29 +41,34 @@ class Solution {
     }
     
     private static void dfs(int idx, int sheepCnt, int wolfCnt, List<Integer> nextPos) {
-        if (Info[idx] == 0) {
+        // 현재 노드가 양인지 늑대인지 확인
+        if (Info[idx] == 0) { 
             sheepCnt++;
         } else {
             wolfCnt++;
         }
-        
+        // 늑대의 수가 양의 수보다 많으면 탐색 중단
         if (wolfCnt >= sheepCnt) {
             return;
         }
-        
+    
         maxSheepCnt = Math.max(sheepCnt, maxSheepCnt);
         
-        List<Integer> list = new ArrayList<>();
-        list.addAll(nextPos);
-        list.remove(Integer.valueOf(idx));
+        // 다음 탐색 위치 갱신
+        List<Integer> visit = new ArrayList<>();
+        visit.addAll(nextPos);
+        
+        // 다음 탐색 목록 중 현재 위치 제외
+        visit.remove(Integer.valueOf(idx));
         if (childs[idx] != null) {
             for (int child : childs[idx]) {
-                list.add(child);
+                visit.add(child);
             }
         }
         
-        for (int next : list) {
-            dfs(next, sheepCnt, wolfCnt, list);
+        // 갈 수 있는 모든 노드 dfs
+        for (int next : visit) {
+            dfs(next, sheepCnt, wolfCnt, visit);
         }
     }
     
