@@ -32,6 +32,10 @@ class Solution {
             //       return 0;
             //   }
             // }
+            /*
+            자바에 내장되어있는 Math.sqrt함수를 통해서 2부터 루트n까지의 범위에서 소수를 체크판별해주는 함수다.
+            범위가 2부터 루트n까지인 이유는 소수는 1과 자기 자신으로만 나누어지는 숫자이기때문이다.
+            */
             for (Long i = 2L; i <= (int)Math.sqrt(n); i++) {
               if (n % i == 0) {
                   return 0;
