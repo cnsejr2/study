@@ -1,3 +1,8 @@
+/*
+    풀이 참고 : https://velog.io/@pppp0722/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%8A%A4-Level3-%EC%82%AC%EB%9D%BC%EC%A7%80%EB%8A%94-%EB%B0%9C%ED%8C%90-Java
+
+*/
+
 class Solution {
     
     int[][] board;
