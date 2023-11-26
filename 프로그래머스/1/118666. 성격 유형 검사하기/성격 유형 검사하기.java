@@ -1,6 +1,7 @@
-// 문제 이해 10분 
-
-
+/* 문제 이해 10분 
+ result[0][0] = 3; 로 적어서 테스트 통과 못함
+ result[0][0] += 3; 라고 적어야 했음
+*/
 class Solution {
        
     public String solution(String[] survey, int[] choices) {
