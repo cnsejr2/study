@@ -23,7 +23,7 @@ class Solution {
         cop = Math.min(cop, maxCop); // cop도 동일
         
         for (int[] ints : dp) {
-            Arrays.fill(ints, INF);
+            Arrays.fill(ints, INF); // 가장 큰 값으로 배열 채우기
         }
         
         dp[alp][cop] = 0; // 시작 위치
