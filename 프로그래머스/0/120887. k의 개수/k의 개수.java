@@ -5,11 +5,10 @@ class Solution {
         int answer = 0;
         
         for (int n = i; n <= j; n++) {
-            String s = String.valueOf(n);
-            String[] num = s.split("");
+            String[] s = String.valueOf(n).split("");
             
-            for (int q = 0; q < num.length; q++) {
-                if (k == Integer.parseInt(num[q])){
+            for (int q = 0; q < s.length; q++) {
+                if (k == Integer.parseInt(s[q])){
                     answer++;
                 }
             }
