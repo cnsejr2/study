@@ -14,25 +14,17 @@ class Solution {
             boolean isFind = true;
             for (int j = 0; j < d.length; j++) {
                 if (map.get(d[j]) != null)  {
-                    if (map.get(d[j]) > 0) {
-                        map.put(d[j], 0);
-                    } else { // 해당 단어를 2번 사용한 경우
-                        isFind = false; 
-                    }
-                } else { // 단어가 없는 경우
+                    map.remove(d[j]);
+                } else { // 단어가 없는 경우 or 해당 단어를 2번 사용한 경우
                     isFind = false; 
                 }
             }
-            for (Map.Entry<Character,Integer> m : map.entrySet()) {
-                if (m.getValue() == 1) {
-                    isFind = false;
+            if (map.size() == 0) {
+                if (isFind) {
+                    return 1;
                 }
             }
             
-        
-            if (isFind) {
-                return 1;
-            }
         }
         return 2;
     }
