@@ -10,9 +10,9 @@ class Solution {
         
         // 수포자 1 점수 계산
         for (int i  = 0; i < answers.length; i++) {
-            if (answers[i] == arr1[i % 5]) score[0]++;
-            if (answers[i] == arr2[i % 8]) score[1]++;
-            if (answers[i] == arr3[i % 10]) score[2]++;
+            if (answers[i] == arr1[i % arr1.length]) score[0]++;
+            if (answers[i] == arr2[i % arr2.length]) score[1]++;
+            if (answers[i] == arr3[i % arr3.length]) score[2]++;
         }
         int max = Math.max(score[0], Math.max(score[1], score[2]));
         
