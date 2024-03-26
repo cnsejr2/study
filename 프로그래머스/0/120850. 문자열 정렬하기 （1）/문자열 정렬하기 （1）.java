@@ -1,17 +1,16 @@
 import java.util.*;
 
 class Solution {
-    public ArrayList solution(String my_string) {
+    public int[] solution(String my_string) {
         
-        char[] ch = my_string.toCharArray();
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        for (char c : ch) {
-            if (c >= '0' && c <= '9') {
-                list.add(c - '0');
-            }
+        String s = my_string.replaceAll("[a-z]", "");
+        int[] answer = new int[s.length()];
+        
+        for (int i = 0; i < s.length(); i++) {
+            answer[i] = s.charAt(i) - '0';
         }
-        list.sort(Comparator.naturalOrder());
-
-        return list;
+        Arrays.sort(answer);
+        
+        return answer;
     }
 }
