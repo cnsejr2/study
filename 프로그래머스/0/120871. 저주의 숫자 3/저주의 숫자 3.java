@@ -1,29 +1,16 @@
 class Solution {
     public int solution(int n) {
+        int answer = 0;
         
-        int i = 0; 
-        int three = 0;
-        while (true) {
-            i++;
-            three++;
+        for(int i = 0 ; i < n; i++) {
+            answer++;
             
-            if (three % 3 == 0 || String.valueOf(three).contains("3")) { 
-                
-                while (true) {
-                    three++;
-                    if (!(three % 3 == 0 || String.valueOf(three).contains("3"))) {
-                        break;
-                    }
-                }
-                
+            while(answer % 3 == 0 || String.valueOf(answer).contains("3")){
+                answer++;
             }
-            
-            if (i == n) {
-                return three;
-            }
-            
             
         }
+        return answer;
         
     }
 }
