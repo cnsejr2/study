@@ -16,7 +16,7 @@ public class Main {
 		}
 	
 		
-		int max = -1;
+		int max = 0;
 		for (int i = 1; i <= n+1; i++) {
 			if (max < dp[i]) {
 				max = dp[i];
