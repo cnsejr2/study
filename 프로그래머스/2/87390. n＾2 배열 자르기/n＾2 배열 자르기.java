@@ -6,6 +6,7 @@ class Solution {
         for (long i = left; i <= right; i++) {
             long x = i / (long) n;
             long y = i % (long) n;
+            System.out.println(x + ", " + y);
             if (x >= y) {
                 answer[k] = (int) x + 1;
             } else {
