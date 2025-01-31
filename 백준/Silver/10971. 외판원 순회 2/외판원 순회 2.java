@@ -1,16 +1,11 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
 	
-	static int[][] map;
-	static boolean[] visit;
-	static ArrayList<Integer> list = new ArrayList<>();
-	static int min = Integer.MAX_VALUE;
-	static int n;
+	static int n, statusFullBit, INF = 987654321;
+	static int[][] w;
+	static int[][] dp;
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
@@ -18,51 +13,46 @@ public class Main {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		
 		n = Integer.parseInt(st.nextToken());
-		map = new int[n + 1][n + 1];
-		visit = new boolean[n + 1];
+		statusFullBit = (1 << n) - 1;
+		w = new int[n][n];
+		dp = new int[n][statusFullBit];
 		
-		for (int i = 1; i <= n; i++) {
+		for (int i = 0; i < n; i++) {
+			Arrays.fill(dp[i],-1);
+		}
+		
+		for (int i = 0; i < n; i++) {
 			st = new StringTokenizer(br.readLine());
-			for (int j = 1; j <= n; j++) {
-				map[i][j] = Integer.parseInt(st.nextToken());
+			for (int j = 0; j < n; j++) {
+				w[i][j] = Integer.parseInt(st.nextToken());
 			}
 		}
 		
-		perm(0);
+		System.out.println(tsp(0, 1));
 		
-		System.out.println(min);
-
 	}
 	
-	private static void perm(int depth) {
+	private static int tsp(int x, int check) {
 		
-		if (depth == n) {
-			int sum = 0;
-			list.add(list.get(0));
-			for (int i = 0; i < list.size() - 1; i++) {
-				int x = list.get(i);
-				int y = list.get(i + 1);
-				if (map[x][y] == 0) {
-					list.remove(list.size() - 1);
-					return;
-				} else {
-					sum += map[x][y];
-				}
-			}
-			list.remove(list.size() - 1);
-			min = Math.min(sum, min);
-			return;
+		if (check == statusFullBit) {
+			if (w[x][0] == 0) return INF;
+			else return w[x][0];
 		}
 		
-		for (int i = 1; i <= n; i++) {
-			if (!visit[i]) {
-				visit[i] = true;
-				list.add(i);
-				perm(depth + 1);
-				visit[i] = false;
-				list.remove(list.size() - 1);
+		if (dp[x][check] != -1) { return dp[x][check]; }
+		
+		dp[x][check] = INF;
+		
+		for (int i = 0; i < n; i++) {
+			int next = check | (1 << i);
+			
+			if (w[x][i] == 0 || (check & 1 << i) != 0) {
+				continue;
 			}
+			dp[x][check] = Math.min(dp[x][check], tsp(i, next) + w[x][i]);
 		}
+		
+		return dp[x][check];
 		
 	}
 
