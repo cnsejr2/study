@@ -90,9 +90,6 @@ public class Main {
 			}
 		}
 		
-		if (result == 1) {
-			return 0;
-		}
 		return result - 1;
 		
 	}
